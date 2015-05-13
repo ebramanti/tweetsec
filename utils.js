@@ -1,1 +1,5 @@
-var utils = module.exports = {}
+var utils = module.exports = {
+    calculateScore: function(password) {
+        var result = 0;
+    }
+}
