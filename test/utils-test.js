@@ -17,7 +17,7 @@ describe('Utils', function() {
         assert.equal(utils.calculateScore(b), 15);
         var c = "s0_0per 5nak3";
         assert.equal(utils.calculateScore(c), 52);
-        var d = "password34";
-        assert.equal(utils.calculateScore(d), 6);
+        var d = "philosophie"; //it's a word! (line 89967)
+        assert.equal(utils.calculateScore(d), 1);
     });
 });

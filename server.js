@@ -1,11 +1,10 @@
 var Twit = require('twit');
-
 var utils = require('./utils');
 var config = require('./config');
 
 var Bot = new Twit(config);
 Bot.botname = '@' + config.botUsername;
-console.log("Working...");
+console.log("Bot initialized!");
 
 var stream = Bot.stream('statuses/filter', {
     track: Bot.botname
@@ -21,15 +20,11 @@ function formatTweet(tweet) {
         return;
     }
     var password = tweet.text.replace(Bot.botname + ' ', '');
-    calculateValue(user, password);
+    replyTweet(user, password);
 }
 
-function calculateValue(user, password) {
+function replyTweet(user, password) {
     var value = utils.calculateScore(password);
-    replyTweet(user, password, value);
-}
-
-function replyTweet(user, password, value) {
     console.log("value: " + value);
     var userPassString = user + " \"" + password + "\" ";
     if (value >= 50) {
@@ -46,9 +41,8 @@ function replyTweet(user, password, value) {
             console.log(data.text);
         });
     } else {
-        var revisedPass;
         Bot.post('statuses/update', {
-            status: userPassString + "is pretty weak. I recommend this as an alternative:"
+            status: userPassString + "is pretty weak. Please try an alternative."
         }, function(err, data, res) {
             console.log(data.text);
         });
