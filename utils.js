@@ -4,9 +4,7 @@ var utils = module.exports = {
     calculateScore: function(password) {
         // Replace English words
         var updatedtext = this.parseEnglish(password);
-        console.log(updatedtext);
         var wordArray = updatedtext.split(/\x20+/);
-        console.log(wordArray);
         wordArray.map(function(word) {
             return word[0];
         });
