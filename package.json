@@ -1,0 +1,10 @@
+{
+  "name": "tweetsec",
+  "version": "0.0.0",
+  "description": "Philosophie Challenge",
+  "main": "server.js",
+  "author": "Edward Bramanti",
+  "dependencies": {
+    "twit": "~1.1.20"
+  }
+}
