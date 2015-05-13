@@ -3,8 +3,10 @@ var utils = require('../utils');
 
 describe('Utils', function() {
     it('should return correct number of character types', function() {
-        var a = "password1";
-        assert.equal(utils.getTypes(a), 2);
+        var a = "password";
+        assert.equal(utils.getTypes(a), 1);
+        var b = "password1";
+        assert.equal(utils.getTypes(b), 2);
         var b = "goat m4n";
         assert.equal(utils.getTypes(b), 3);
         var c = "s0_0per 5nak3";
