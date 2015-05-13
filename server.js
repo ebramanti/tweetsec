@@ -17,6 +17,9 @@ stream.on('tweet', function(tweet) {
 
 function formatTweet(tweet) {
     var user = "@" + tweet.user.screen_name;
+    if (user === Bot.botname) {
+        return;
+    }
     var password = tweet.text.replace(Bot.botname + ' ', '');
     calculateValue(user, password);
 }
