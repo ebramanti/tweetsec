@@ -1,16 +1,23 @@
-
+var spawnSync = require('child_process').spawnSync;
 
 var utils = module.exports = {
     calculateScore: function(password) {
-        var result = 0;
-        var updatedtext = '';
-        //Replace English words
-
-        //Find character types in string
-        var types = this.getTypes(updatedtext);
-        //Multiply character types by updated length
-
-        return result;
+        // Replace English words
+        // Word finder found here: http://stackoverflow.com/a/11642687/1166128
+        var command = spawnSync('python', ['wordFinder.py', password]);
+        var updatedtext = command.stdout.toString();
+        console.log(updatedtext);
+        var wordArray = updatedtext.split(/\x20+/);
+        console.log(wordArray);
+        wordArray.map(function(word) {
+            return word[0];
+        });
+        updatedtext = wordArray.join('');
+        // Find character types in string
+        var types = this.getTypes(password);
+        // Multiply character types by updated length
+        var passwordLength = wordArray.length + (password.split(/\s/).length-1);
+        return types * passwordLength;
     },
 
     getTypes: function(string) {
