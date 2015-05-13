@@ -3,9 +3,7 @@ var spawnSync = require('child_process').spawnSync;
 var utils = module.exports = {
     calculateScore: function(password) {
         // Replace English words
-        // Word finder found here: http://stackoverflow.com/a/11642687/1166128
-        var command = spawnSync('python', ['wordFinder.py', password]);
-        var updatedtext = command.stdout.toString();
+        var updatedtext = this.parseEnglish(password);
         console.log(updatedtext);
         var wordArray = updatedtext.split(/\x20+/);
         console.log(wordArray);
@@ -16,8 +14,14 @@ var utils = module.exports = {
         // Find character types in string
         var types = this.getTypes(password);
         // Multiply character types by updated length
-        var passwordLength = wordArray.length + (password.split(/\s/).length-1);
+        var passwordLength = wordArray.length + (password.split(/\s/).length - 1);
         return types * passwordLength;
+    },
+
+    parseEnglish: function(password) {
+        // Word finder found here: http://stackoverflow.com/a/11642687/1166128
+        var command = spawnSync('python', ['wordFinder.py', password]);
+        return command.stdout.toString();
     },
 
     getTypes: function(string) {
